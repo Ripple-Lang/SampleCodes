@@ -1,0 +1,22 @@
+﻿// ステージの宣言
+stage x as float;   // 被食者(うさぎ)
+stage y as float;   // 捕食者(きつね)
+
+// パラメーターの宣
+param a  as float;  // うさぎの自然増(誕生)
+param b  as float;  // うさぎの被食による減少
+param c  as float;  // きつねの自然減(死亡)
+param d  as float;  // きつねの捕食による増加
+param dt = 0.01;
+
+// 初期化
+init {
+    x <= 10;
+    y <= 5;
+}
+
+// 各時刻で実行するコード
+operation {
+    x <= x + (a - b * y) * x * dt;
+    y <= y - (c - d * x) * y * dt;
+}

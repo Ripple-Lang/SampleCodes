@@ -1,0 +1,38 @@
+stage plain as ubyte[nx, ny];
+
+param nx as int;
+param ny as int;
+
+param threshold as float;
+
+init {
+    each (at i, j in plain) {
+        if (i != 0 and i != nx - 1 and j != 0 and j != ny - 1) {
+            var f = randomfloat(0, 1);
+            plain[i, j] <= (f <= threshold ? 1 : 0) as ubyte;
+        }
+    }
+}
+
+operation {
+    each (at i, j in plain) {
+        if (i != 0 and i != nx - 1 and j != 0 and j != ny - 1) {
+            var numOfTrue as int = 0;
+            for (x = i - 1 to i + 1) {
+                for (y = j - 1 to j + 1) {
+                    numOfTrue += plain<now>[x, y];
+                }
+            }
+            
+            numOfTrue -= plain<now>[i, j];    // 自分自身を引く
+
+            if (numOfTrue = 3) {
+                plain<next>[i, j] = 1;
+            } else if (numOfTrue = 2) {
+                plain<next>[i, j] = plain<now>[i, j];
+            } else {
+                plain<next>[i, j] = 0;
+            }
+        }
+    }
+}
