@@ -1,4 +1,1 @@
-SampleCodes
-===========
-
-プログラミング言語Rippleで書かれたシミュレーションのサンプルコードです。
+[プログラミング言語「Ripple」](https://github.com/Ripple-Lang/Ripple)で書かれたシミュレーションのサンプルコードです。
