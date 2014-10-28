@@ -1,4 +1,4 @@
-stage plain as ubyte[nx, ny];
+﻿stage plain as ubyte[nx, ny];
 
 param nx as int;
 param ny as int;
@@ -15,7 +15,7 @@ init {
 }
 
 operation {
-    each (at i, j in plain) {
+    parallel each (at i, j in plain) {
         if (i != 0 and i != nx - 1 and j != 0 and j != ny - 1) {
             var numOfTrue as int = 0;
             for (x = i - 1 to i + 1) {
